@@ -1,0 +1,216 @@
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.virtualenv/
+
+# ── Python cache & bytecode ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# ── Distribution / packaging ──────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.whl
+
+# ── YOLO / Ultralytics model weights ─────────────────────────────────────────
+# Large binary files — downloaded automatically on first run
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+*.pb
+*.bin
+*.weights
+*.caffemodel
+*.prototxt
+runs/
+datasets/
+
+# ── PyTorch / ML framework cache ─────────────────────────────────────────────
+*.cache/
+hub/
+.torch/
+lightning_logs/
+checkpoints/
+saved_models/
+models/
+
+# ── Logs & output ─────────────────────────────────────────────────────────────
+*.log
+alerts.log
+proctoring_log.csv
+logs/
+output/
+results/
+captures/
+snapshots/
+recordings/
+evidence/
+violations/
+exports/
+
+# ── Video / image output ──────────────────────────────────────────────────────
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+# (keep sample images if needed, but ignore large recorded footage)
+recorded_sessions/
+frames/
+
+# ── Sensitive data / PII ──────────────────────────────────────────────────────
+# Never commit candidate data, face captures, or any biometric data
+candidate_data/
+face_data/
+biometrics/
+reports/
+exam_sessions/
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.json.bak
+
+# ── Environment / secrets ────────────────────────────────────────────────────
+.env
+.env.*
+*.env
+.env.local
+.env.development
+.env.production
+.env.test
+config.local.py
+secrets.py
+credentials.py
+api_keys.py
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ── Jupyter Notebooks checkpoints ────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS-generated files ────────────────────────────────────────────────────────
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ── IDEs & editors ────────────────────────────────────────────────────────────
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains (PyCharm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.ncb
+*.aps
+
+# Vim / Emacs
+*.swp
+*.swo
+*.swn
+*~
+\#*\#
+.\#*
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ── Test & coverage ───────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+*.py,cover
+nosetests.xml
+test-results/
+.tox/
+.nox/
+.hypothesis/
+
+# ── Type checking ─────────────────────────────────────────────────────────────
+.mypy_cache/
+.pytype/
+.pyre/
+.dmypy.json
+dmypy.json
+
+# ── Documentation build ───────────────────────────────────────────────────────
+docs/_build/
+site/
+.readthedocs.yaml.bak
+
+# ── Profiling & debugging ─────────────────────────────────────────────────────
+*.prof
+*.lprof
+*.stats
+profile_output/
+
+# ── dlib / other large model files ───────────────────────────────────────────
+shape_predictor_68_face_landmarks.dat
+shape_predictor_5_face_landmarks.dat
+dlib_face_recognition_resnet_model_v1.dat
+mmod_human_face_detector.dat
+*.dat
+res10_300x300_ssd_iter_140000.caffemodel
+
+# ── Temp / scratch files ─────────────────────────────────────────────────────
+tmp/
+temp/
+scratch/
+*.tmp
+*.bak
+*.orig
+*.pid
