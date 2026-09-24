@@ -25,7 +25,7 @@ An AI-powered exam proctoring tool that uses your webcam to:
 
 Open **Command Prompt** or **PowerShell** in the project folder and run:
 ```cmd
-python -m venv .venv
+python -m venv .ven
 ```
 
 ### Step 3 — Activate the virtual environment
@@ -90,17 +90,20 @@ Every time you want to run the proctoring system:
 
 **Command Prompt:**
 ```cmd
-cd C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai
-.venv\Scripts\activate.bat
+cd {filepath}\activate.bat
 python app.py
 ```
+{filepath} represents your actual file path. replace it with your own.
+example: C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai
+.venv\Scripts\activate.bat
 
 **PowerShell:**
 ```powershell
-cd "C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai"
+cd "{filepath}"
 .\.venv\Scripts\Activate.ps1
 python app.py
 ```
+{filepath} = Your actual filepath. Example C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai
 
 Or double-click **`run.bat`** — it activates the venv and launches the app automatically.
 
@@ -119,17 +122,6 @@ exam-proctoring-system-ai/
 │   README.md           # This file
 │   LICENSE             # MIT License
 ```
-
----
-
-## Customization
-
-| What to change | Where | How |
-|----------------|-------|-----|
-| Add/remove prohibited objects | `detection.py` | Edit the `target_classes` set |
-| Change head-turn sensitivity | `tracker.py` | Adjust `yaw_threshold` (default `0.35`; lower = more sensitive) |
-| Use a larger/more accurate model | `detection.py` | Change `"yolov8n.pt"` → `"yolov8s.pt"` or `"yolov8m.pt"` |
-| Use GPU instead of CPU | Both files | Change `device="cpu"` → `device="cuda"` |
 
 ---
 
