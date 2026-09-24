@@ -19,14 +19,11 @@ An AI-powered exam proctoring tool that uses your webcam to:
 
 ### Step 1 — Clone or download the project
 
-```cmd
-cd C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai
-```
+ ```clone project```
 
 ### Step 2 — Create a virtual environment
 
 Open **Command Prompt** or **PowerShell** in the project folder and run:
-
 ```cmd
 python -m venv .venv
 ```
