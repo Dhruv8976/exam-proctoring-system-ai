@@ -9,11 +9,12 @@ An AI-powered exam proctoring tool that uses your webcam to:
 
 ## Requirements
 
-- **Python 3.10 – 3.12** (⚠️ Python 3.14 is NOT fully supported by all dependencies — use 3.11 or 3.12 for best compatibility)
+- **Python 3.10 – 3.14** (⚠️ Python 3.14 is NOT fully supported by all dependencies — use 3.11 or 3.12 for best compatibility)
 - A working webcam
-- Windows (instructions below use PowerShell / Command Prompt)
 
 ---
+
+
 
 ## Setup (first time only)
 
@@ -25,7 +26,7 @@ An AI-powered exam proctoring tool that uses your webcam to:
 
 Open **Command Prompt** or **PowerShell** in the project folder and run:
 ```cmd
-python -m venv .ven
+python -m venv .venv
 ```
 
 ### Step 3 — Activate the virtual environment
