@@ -1,3 +1,6 @@
+# Note:  I have also used ai to write some part of code.
+
+
 # Exam Proctoring System AI
 
 An AI-powered exam proctoring tool that uses your webcam to:
