@@ -1,19 +1,19 @@
-# Note:  I have also used ai to write some part of code.
+# Note:  I have also used AI to boost Project and its efficiency.
 
 
 # Exam Proctoring System AI
 
 An AI-powered exam proctoring tool that uses your webcam to:
 
-- 🔍 **Detect prohibited objects** — cell phones, books, laptops (via YOLOv8)
-- 👤 **Track head movement** — alerts when the candidate looks away from the screen (via YOLOv8 Pose)
+- 🔍 **Detect prohibited objects** - cell phones, books, laptops, cheats (via YOLOv8)
+- 👤 **Track head movement** - alerts when the candidate looks away from the screen (via YOLOv8 Pose)
 
 ---
 
 ## Requirements
 
-- **Python 3.10 – 3.14** (⚠️ Python 3.14 is NOT fully supported by all dependencies — use 3.11 or 3.12 for best compatibility)
-- A working webcam
+- **Python 3.10 OR Higher** 
+- A working webcam / camera device.
 
 ---
 
@@ -21,18 +21,18 @@ An AI-powered exam proctoring tool that uses your webcam to:
 
 ## Setup (first time only)
 
-### Step 1 — Clone or download the project
+### Step 1 - Clone or download the project
 
  ```clone project```
 
-### Step 2 — Create a virtual environment
+### Step 2 - Create a virtual environment
 
 Open **Command Prompt** or **PowerShell** in the project folder and run:
 ```cmd
 python -m venv .venv
 ```
 
-### Step 3 — Activate the virtual environment
+### Step 3 - Activate the virtual environment
 
 **Command Prompt:**
 ```cmd
@@ -46,7 +46,7 @@ python -m venv .venv
 
 You should see `(.venv)` appear at the start of your prompt. ✅
 
-### Step 4 — Fix OpenCV conflicts
+### Step 4 - Fix OpenCV conflicts
 
 `ultralytics` may install `opencv-python-headless` automatically. Remove it and install the full version:
 
@@ -55,20 +55,20 @@ pip uninstall opencv-python-headless -y
 pip install opencv-python
 ```
 
-### Step 5 — Install all dependencies
+### Step 5 - Install all dependencies
 
 ```cmd
 pip install -r requirements.txt
 ```
 
 This installs:
-- `opencv-python` — webcam capture and image processing
-- `ultralytics` — YOLOv8 object detection and pose estimation
-- `numpy`, `pillow` — supporting libraries
+- `opencv-python` - webcam capture and image processing
+- `ultralytics` - YOLOv8 object detection and pose estimation
+- `numpy`, `pillow` - supporting libraries
 
 > **Note:** On first run, two small models will be auto-downloaded:
-> - `yolov8n.pt` (~6 MB) — object detection
-> - `yolov8n-pose.pt` (~6 MB) — head pose / landmark detection
+> - `yolov8n.pt` (~6 MB) - object detection
+> - `yolov8n-pose.pt` (~6 MB) - head pose / landmark detection
 
 ---
 
@@ -107,6 +107,8 @@ The system includes a dedicated **Admin Control Panel** with restricted proctor 
 
 - **Default ID:** `admin`
 - **Default Password:** `admin`
+- You can change it from [`config.json`](config.json) or from admin panel.
+
 
 ### Launching the Admin Panel:
 - **From within the app:** Click the **`🔐 Admin Panel`** button in the top header or press **`F10`**.
@@ -145,7 +147,7 @@ python app.py
 ```
 {filepath} = Your actual filepath. Example C:\Users\Dhruv Yadev\Desktop\Projects\exam-proctoring-system-ai
 
-Or double-click **`run.bat`** — it activates the venv and launches the app automatically.
+Or double-click **`run.bat`** - it activates the venv and launches the app automatically.
 
 ---
 
@@ -153,7 +155,7 @@ Or double-click **`run.bat`** — it activates the venv and launches the app aut
 
 ```
 exam-proctoring-system-ai/
-│   app.py              # Main Entry point — Command Center, webcam loop, alerts
+│   app.py              # Main Entry point - Command Center, webcam loop, alerts
 │   admin.py            # Admin Control Console (ID: admin, Pass: admin)
 │   config.py           # Configuration manager & persistence (config.json)
 │   detection.py        # YOLOv8 object detector (cell phone, book, laptop)
@@ -174,11 +176,14 @@ exam-proctoring-system-ai/
 | `ModuleNotFoundError: No module named 'cv2'` | Make sure the venv is active and run `pip install opencv-python` |
 | `ModuleNotFoundError: No module named 'torch'` | Run `pip install ultralytics` inside the active venv |
 | `AttributeError: module 'cv2' has no attribute 'CascadeClassifier'` | Run `pip uninstall opencv-python-headless -y && pip install opencv-python` |
-| `ValueError: Unrecognized response` (YOLOv5 hub) | Fixed — the project now uses YOLOv8 via `ultralytics` directly |
+| `ValueError: Unrecognized response` (YOLOv5 hub) | Fixed - the project now uses YOLOv8 via `ultralytics` directly |
 | Webcam not opening | Check that no other app is using the camera; change `cv2.VideoCapture(0)` index in `app.py` if you have multiple cameras |
 
 ---
 
+### NOTE: THIS README FILE IS ALSO ENHANCED WITH AI SO THAT I CAN MAKE MY WORK MORE CLEAR.
+
+
 ## License
 
-MIT — see [`LICENSE`](LICENSE)
+MIT - see [`LICENSE`](LICENSE)
