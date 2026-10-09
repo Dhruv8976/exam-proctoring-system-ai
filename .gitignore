@@ -214,3 +214,6 @@ scratch/
 *.bak
 *.orig
 *.pid
+
+# config files
+config.json

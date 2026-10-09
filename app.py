@@ -161,8 +161,11 @@ class ProctoringApp(tk.Tk):
         self._intruder_detector     = None
 
         self.sound = SoundFX()
-        self.last_audio_trigger     = time.time()
-        self.last_snapshot_trigger  = time.time()
+        self.last_audio_trigger          = time.time()
+        self.last_snapshot_trigger       = time.time()
+        self.last_phone_snapshot_time    = 0.0
+        self.last_intruder_snapshot_time = 0.0
+        self.snapshot_cooldown           = 3.0  # seconds cooldown between automated snapshots
 
         self._build_fonts()
         self._build_layout()
@@ -582,6 +585,39 @@ class ProctoringApp(tk.Tk):
         cv2.imwrite(path, frame)
         self._write_log_csv("ADMIN_REMOTE_SNAPSHOT", path)
 
+    def _auto_capture_snapshot(self, frame, event_tag: str, detail_msg: str):
+        """Asynchronously save a timestamped evidence frame when phone or intruder is detected."""
+        img_copy = frame.copy()
+
+        def _worker():
+            try:
+                os.makedirs("snapshots", exist_ok=True)
+                ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"{event_tag}_{ts}.jpg"
+                path = os.path.join("snapshots", filename)
+
+                # Add evidence watermark banner on the saved image
+                h, w = img_copy.shape[:2]
+                cv2.rectangle(img_copy, (10, 10), (min(w - 10, 480), 42), (18, 22, 28), -1)
+                cv2.rectangle(img_copy, (10, 10), (min(w - 10, 480), 42), (48, 54, 61), 1)
+                cv2.putText(
+                    img_copy,
+                    f"AUTO EVIDENCE: {detail_msg.upper()}  •  {datetime.datetime.now().strftime('%H:%M:%S')}",
+                    (20, 31),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.42,
+                    (240, 246, 252),
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.imwrite(path, img_copy)
+                self.after(0, self._append_log, f"📸 Auto-snapshot archived: {filename}", "muted")
+                self._write_log_csv(f"AUTO_SNAPSHOT_{event_tag.upper()}", path)
+            except Exception:
+                pass
+
+        threading.Thread(target=_worker, daemon=True).start()
+
     def _toggle_sound(self):
         messagebox.showinfo("Audio Control Restricted", "Audio alarms are managed exclusively by the Exam Administrator.")
 
@@ -718,27 +754,41 @@ class ProctoringApp(tk.Tk):
 
             # 1. Prohibited Object Detection
             detections, multiple_people = detector.detect(frame)
+            phone_detected = False
 
             if detections:
                 alert_this_frame = True
                 names = ", ".join(d[5] for d in detections)
                 for x1, y1, x2, y2, conf, cls in detections:
                     draw_clean_bbox(frame, (x1, y1), (x2, y2), f"{cls.title()} {conf:.0%}", BGR_CRIMSON)
+                    if cls == "cell phone" or "phone" in cls.lower():
+                        phone_detected = True
 
                 hud_alerts.append((f"Item: {names.title()}", BGR_CRIMSON))
                 self.after(0, self._append_log, f"Prohibited item detected: {names}", "danger")
                 self.after(0, self._set_status, self.status_obj, names, DANGER)
                 self._write_log_csv("OBJECT_DETECTED", names)
+
+                # Automatic snapshot when phone is detected
+                if phone_detected and (now - self.last_phone_snapshot_time >= self.snapshot_cooldown):
+                    self.last_phone_snapshot_time = now
+                    self._auto_capture_snapshot(frame, "phone", "Cell Phone Detected")
             else:
                 self.after(0, self._set_status, self.status_obj, "None Detected", SUCCESS)
 
             # 2. Multiple Persons Check
             if multiple_people:
                 alert_this_frame = True
+                intruder_this_frame = True
                 hud_alerts.append(("Multiple People", BGR_CRIMSON))
                 self.after(0, self._set_status, self.status_people, "Multiple People", DANGER)
                 self.after(0, self._append_log, "Multiple people visible in camera frame", "danger")
                 self._write_log_csv("MULTIPLE_PEOPLE", "")
+
+                # Automatic snapshot when multiple persons are detected
+                if now - self.last_intruder_snapshot_time >= self.snapshot_cooldown:
+                    self.last_intruder_snapshot_time = now
+                    self._auto_capture_snapshot(frame, "intruder", "Multiple Persons Detected")
             else:
                 self.after(0, self._set_status, self.status_people, "1 Person", SUCCESS)
 
@@ -760,17 +810,24 @@ class ProctoringApp(tk.Tk):
             else:
                 self.after(0, self._set_status, self.status_head, "Facing Screen", SUCCESS)
 
-            # 4. Intrusion Detection (Extra Person)
-            intruder_result = intruder.detect(frame)
+            # 4. Intrusion Detection (Extra Person / Face Mismatch)
+            intruder_result = intruder.detect(frame, auto_save=False)
 
-            if intruder_result.extra_person:
+            if intruder_result.extra_person or intruder_result.face_mismatch:
                 intruder_this_frame = True
-                hud_alerts.append(("Extra Person Detected", BGR_VIOLET))
+                tag_label = "Extra Person Detected" if intruder_result.extra_person else "Face Mismatch"
+                hud_alerts.append((tag_label, BGR_VIOLET))
                 self.after(0, self._set_status, self.status_intruder, "Extra Person", INTRUDER)
-                self.after(0, self._append_log, "Extra person detected in camera frame", "intruder")
-                self._write_log_csv("INTRUDER_EXTRA_PERSON", intruder_result.snapshot_path or "")
+                self.after(0, self._append_log, f"Intruder alert: {tag_label}", "intruder")
+                self._write_log_csv("INTRUDER_ALERT", tag_label)
+
+                # Automatic snapshot when intruder is detected
+                if now - self.last_intruder_snapshot_time >= self.snapshot_cooldown:
+                    self.last_intruder_snapshot_time = now
+                    self._auto_capture_snapshot(frame, "intruder", tag_label)
             else:
-                self.after(0, self._set_status, self.status_intruder, "Clear", SUCCESS)
+                if not multiple_people:
+                    self.after(0, self._set_status, self.status_intruder, "Clear", SUCCESS)
 
             # Status resolution
             if intruder_this_frame:

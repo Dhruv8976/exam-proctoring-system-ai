@@ -80,49 +80,47 @@ Make sure the virtual environment is **active** (`(.venv)` shows in prompt), the
 python app.py
 ```
 
-A clean, modern **AI Exam Proctoring System** window will open.
+A modern **AI Exam Proctoring Command Center** window will open.
 
-### System Features:
-- 👁️ **Minimalist Monitoring Feed**: Clean webcam display with crisp, non-intrusive bounding boxes and status pills without distracting clutter or radar effects.
-- 📊 **Session Integrity Meter**: Real-time compliance score dynamically weighted against detected anomalies.
-- 👤 **Multiple Persons & Intruder Detection**: Flags multiple individuals or unauthorized persons present in the camera frame.
-- 📱 **Prohibited Object Detection**: Detects cell phones, books, and laptops using YOLOv8 deep learning vision models.
-- 👁️ **Head Pose & Gaze Tracking**: Tracks candidate face landmarks to identify when the user looks away from the screen.
-- 📸 **Proctor-Exclusive Evidence Archival**: Silent frame captures on infractions and remote snapshot requests saved exclusively into the Admin Evidence Vault.
-- 🔊 **Admin-Controlled Audio**: Audio alarms and chimes are managed exclusively by exam administrators from the Admin Panel; candidates cannot disable or tamper with alerts.
-- ⛶ **Fullscreen Mode**: Press `F11` for focused proctoring.
+### Command Center Features:
+- 🖥️ **Sci-Fi HUD Overlays**: Live telemetry bar, tactical corner brackets, and perimeter hazard flash alerts.
+- 📊 **Exam Integrity Index**: Real-time 0–100% compliance trust meter dynamically weighted against anomalies.
+- 🚨 **Multi-Level Threat Radar**: Real-time threat classification (`NOMINAL`, `CAUTION`, `ELEVATED`, `CRITICAL`).
+- 📸 **Proctor-Exclusive Evidence Archival**: Evidence snapshots are captured silently on security infractions or on-demand by proctors, and are archived exclusively into the Admin Evidence Vault.
+- 🔊 **Admin Audio Dispatch & Alert System**: Audio controls are strictly managed by proctors via the Admin Panel; candidates cannot mute warnings. Admin can sound real-time sirens and chimes across candidate sessions on demand.
+- ⛶ **Fullscreen Kiosk Mode**: Press `F11` for complete monitoring immersion.
 
 ### Hotkeys:
 | Key | Action |
 |-----|--------|
 | **`Space`** | Start / Stop Monitoring Session |
 | **`F10`** | Open Admin Control Panel |
-| **`F11`** | Toggle Fullscreen Mode |
-| **`C`** | Clear Activity Log |
+| **`F11`** | Toggle Fullscreen Command Center Mode |
+| **`C`** | Clear Security Event Stream |
 | **`Esc`** | Exit Fullscreen Mode |
 
 ---
 
 ## 🔐 Admin Control Console
 
-The system includes a dedicated **Admin Control Panel** with administrator authentication:
+The system includes a dedicated **Admin Control Panel** with restricted proctor authentication:
 
-- **Default Username:** `admin`
+- **Default ID:** `admin`
 - **Default Password:** `admin`
 
 ### Launching the Admin Panel:
-- **From within the app:** Click the **`Admin Panel`** button in the top header or press **`F10`**.
+- **From within the app:** Click the **`🔐 Admin Panel`** button in the top header or press **`F10`**.
 - **Standalone launch:** Run directly from terminal:
   ```powershell
   python admin.py
   ```
 
 ### Admin Console Capabilities:
-1. **Candidate Audio & Directives**: Master audio enable/silence switch and real-time remote audio directives (`Warning Chime`, `Danger Beep`, `Emergency Siren`).
-2. **Evidence Vault & Remote Capture**: Inspect breach evidence snapshots, review metadata, open full images, delete records, and capture live candidate frames on demand.
-3. **Session Audit Logs**: Browse historical session CSVs, calculate violation metrics, and view detailed tabular event streams.
-4. **AI Sensitivity & Rules Tuning**: Adjust model confidence thresholds for cell phones, books, and laptops, customize head yaw gaze sensitivity, debounce frames, and penalty weights.
-5. **Security & Diagnostics**: Update administrator credentials and inspect real-time system diagnostics.
+1. **📢 Candidate Audio & Directives Dispatch**: Master audio enable/silence switch, live sound directives (`Warning Chime`, `Danger Beep`, `Breach Siren`), and on-demand **`📸 Snap Candidate`** button transmitted instantly to active sessions.
+2. **📸 Evidence Vault & Remote Capture**: Inspect breach evidence snapshots, review metadata, open full images, delete records, and capture live candidate frames on demand.
+3. **📊 Session Audit Logs**: Browse all historical session CSVs, calculate violation metrics, view detailed tabular event streams, and open/delete logs.
+4. **⚙️ AI Sensitivity & Rules Tuning**: Adjust model confidence thresholds for cell phones, books, and laptops, customize head yaw gaze sensitivity, debounce frames, and penalty point weights.
+5. **🛡️ Security & Account Settings**: Update administrator password and view system diagnostics and storage health.
 
 ---
 

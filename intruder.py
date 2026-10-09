@@ -118,7 +118,7 @@ class IntruderDetector:
     def is_registered(self) -> bool:
         return self._ref_descriptors is not None
 
-    def detect(self, frame: np.ndarray) -> IntruderResult:
+    def detect(self, frame: np.ndarray, auto_save: bool = False) -> IntruderResult:
         """Analyse *frame* and return an IntruderResult."""
         result     = IntruderResult()
         boxes      = self._detect_persons(frame)
@@ -140,8 +140,8 @@ class IntruderDetector:
                     if ratio < FACE_MATCH_RATIO:
                         result.face_mismatch = True
 
-        # ── save snapshot on any alert ────────────────────────────────────────
-        if result.extra_person or result.face_mismatch:
+        # ── save snapshot on any alert (if auto_save requested) ───────────────
+        if auto_save and (result.extra_person or result.face_mismatch):
             result.snapshot_path = self._save_snapshot(frame, result)
 
         return result

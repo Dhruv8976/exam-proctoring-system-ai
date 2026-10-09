@@ -8,8 +8,8 @@
     "away_frames": 8,
     "violation_penalty": 2,
     "intruder_penalty": 10,
-    "sound_alerts": true,
-    "remote_audio_trigger": 0.0,
-    "remote_audio_type": "",
+    "sound_alerts": false,
+    "remote_audio_trigger": 1791570450.8543808,
+    "remote_audio_type": "warning",
     "remote_snapshot_trigger": 0.0
 }
