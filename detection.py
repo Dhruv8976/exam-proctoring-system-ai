@@ -40,6 +40,15 @@ PROHIBITED: Dict[str, float] = {
     "headphones":   0.60,   # headphones
 }
 
+try:
+    from config import load_config
+    _cfg = load_config()
+    PROHIBITED["cell phone"] = _cfg.get("threshold_phone", 0.55)
+    PROHIBITED["book"]       = _cfg.get("threshold_book", 0.65)
+    PROHIBITED["laptop"]     = _cfg.get("threshold_laptop", 0.65)
+except Exception:
+    pass
+
 # Temporal-smoothing parameters
 HISTORY_LEN = 10   # remember the last N frames per class
 MIN_HITS    = 6    # class must appear in >= this many of the last N frames

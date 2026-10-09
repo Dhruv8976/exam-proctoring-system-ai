@@ -28,6 +28,14 @@ AWAY_FRAMES = 8
 YAW_THRESHOLD   = 0.30   # ear-nose-ear ratio deviation from 0.5
 PITCH_THRESHOLD = 0.28   # eye-nose vertical ratio threshold
 
+try:
+    from config import load_config
+    _cfg = load_config()
+    AWAY_FRAMES   = _cfg.get("away_frames", 8)
+    YAW_THRESHOLD = _cfg.get("yaw_threshold", 0.30)
+except Exception:
+    pass
+
 
 class HeadMovementTracker:
     """Tracks head orientation using YOLOv8 Pose keypoints with debouncing

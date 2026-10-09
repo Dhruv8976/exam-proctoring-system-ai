@@ -1,0 +1,15 @@
+{
+    "admin_id": "admin",
+    "admin_pass": "admin",
+    "threshold_phone": 0.55,
+    "threshold_book": 0.65,
+    "threshold_laptop": 0.65,
+    "yaw_threshold": 0.3,
+    "away_frames": 8,
+    "violation_penalty": 2,
+    "intruder_penalty": 10,
+    "sound_alerts": true,
+    "remote_audio_trigger": 0.0,
+    "remote_audio_type": "",
+    "remote_snapshot_trigger": 0.0
+}
