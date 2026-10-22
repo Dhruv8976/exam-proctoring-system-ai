@@ -46,16 +46,8 @@ python -m venv .venv
 
 You should see `(.venv)` appear at the start of your prompt. ✅
 
-### Step 4 - Fix OpenCV conflicts
 
-`ultralytics` may install `opencv-python-headless` automatically. Remove it and install the full version:
-
-```cmd
-pip uninstall opencv-python-headless -y
-pip install opencv-python
-```
-
-### Step 5 - Install all dependencies
+### Step 4 - Install all dependencies
 
 ```cmd
 pip install -r requirements.txt
